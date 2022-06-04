@@ -11,12 +11,32 @@ void print(const char* s)
 void read(char* word,const int maxSize)
 {
 	const char* const pEnd = word + maxSize;
-	for (char c = _getch(); c != 13 && word < pEnd; c = _getch(), word++)
+	for (char c = _getch(); c != 13 && (word + 1 < pEnd); c = _getch(), word++)
 	{
 		_putch(c);
 		*word = c;
 	}
 	*word  = 0;
+}
+
+int stringToInt(const char* str)
+{
+	int wholeN = 0;
+	for (char c ='0'; (c >= 48 && c <= 57); c = *str, str++)
+	{
+		wholeN = wholeN * 10 + (c - 48);
+	}
+	return wholeN;
+}
+
+int fibo(const int ene)
+{
+	if (ene < 2)
+	{
+		return(ene);
+	}
+	else
+		return fibo(ene - 1) + fibo(ene-2);
 }
 
 int main()
@@ -56,6 +76,18 @@ int main()
 	read(inbuf, 80);
 	print ("\nYou wrote this piece of shit:  ");
 	print(inbuf);
+
+	print("Write some integer: ");
+	char inbuf2[10];
+	read(inbuf2, 10);
+	int integer = stringToInt(inbuf2);
+	print("\nYou wrote this fucking whole number:  ");
+	for (int i = 0; i < integer; i++)
+		_putch('X');
+
+	int fb = fibo(integer);
+	
+
 	while (!_kbhit())
 	{
 
